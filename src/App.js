@@ -11,9 +11,11 @@ class App extends Component {
     this.state = { amount: 1000, duration: 6, interest: "", emi: "" };
   }
 
-  handleAmountChange = value => {
+  calculateEMI = () => {
     fetch(
-      "https://ftl-frontend-test.herokuapp.com/interest?amount=2000&numMonths=12"
+      `https://ftl-frontend-test.herokuapp.com/interest?amount=${
+        this.state.amount
+      }&numMonths=${this.state.duration}`
     )
       .then(res => res.json())
       .then(
@@ -33,8 +35,18 @@ class App extends Component {
           });
         }
       );
+  };
+
+  handleAmountChange = value => {
+    this.calculateEMI();
     this.setState({ amount: value });
   };
+
+  handleDurationChange = e => {
+    this.calculateEMI();
+    this.setState({ duration: e.target.value });
+  };
+
   render() {
     return (
       <div className="App">
@@ -53,6 +65,7 @@ class App extends Component {
             max="24"
             step="2"
             value={this.state.duration}
+            onChange={this.handleDurationChange}
           />
         </div>
         <div>
