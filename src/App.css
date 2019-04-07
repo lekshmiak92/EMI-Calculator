@@ -2,18 +2,7 @@
   text-align: center;
   margin: 3rem 2rem;
 }
-.inputUnit {
-  font-size: 1rem;
-}
-.userValueInput {
-  padding: 8px 6px;
-  font-size: 1rem;
-  text-align: center;
-  border-width: 1px;
-  border-style: groove;
-  border-radius: 4px;
-  margin: 0 0% 0 5%;
-}
+
 .resultBlock {
   margin: 10%;
 }
@@ -21,11 +10,6 @@
   color: rgb(61, 61, 255);
   font-size: 1.5rem;
 }
-h2 {
-  display: inline-block;
-}
-.inputRange {
-  width: 40%;
-  display: inline-block;
-  margin: 0 10%;
+.errorMsg {
+  color: rgb(233, 67, 67);
 }

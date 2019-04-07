@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-// import logo from './logo.svg';
-// import AmountSlider from "./components/amountSlider";
 import Header from "./components/header";
-
-// import InputRange from "react-input-range";
-// import "react-input-range/lib/css/index.css";
 import "./App.css";
 import UserInputBlock from "./components/userInputBlock";
 import DisplayResult from "./components/result";
+import ErrorMsg from "./components/error";
 
 const MAX_AMOUNT = 5000;
 const MIN_AMOUNT = 500;
@@ -28,10 +24,12 @@ class App extends Component {
     };
   }
 
+  // EMI and Interest rate is calculated for default values on page load
   componentDidMount() {
     this.calculateEMI();
   }
 
+  // Check whether user given value for Principal amount is valid
   isValidAmount = amount => {
     if (amount <= MAX_AMOUNT && amount >= MIN_AMOUNT) {
       return true;
@@ -40,6 +38,7 @@ class App extends Component {
     }
   };
 
+  // Check whether user given value for Loan duration is valid
   isValidDuration = duration => {
     if (duration <= MAX_DURATION && duration >= MIN_DURATION) {
       return true;
@@ -48,9 +47,9 @@ class App extends Component {
     }
   };
 
+  // To calculate EMI and Interest rate using API call if there is no error message
   calculateEMI = () => {
     if (!this.state.showErrorMessage) {
-      this.setState({ showErrorMessage: false });
       fetch(
         `https://ftl-frontend-test.herokuapp.com/interest?amount=${
           this.state.amount
@@ -75,6 +74,7 @@ class App extends Component {
     }
   };
 
+  // Display error message if the user given Amount values on input field are not valid, else calls function for emi calculation
   handleAmountChange = e => {
     let inputAmount = Number(e.target.value);
     if (this.isValidAmount(inputAmount)) {
@@ -84,11 +84,14 @@ class App extends Component {
       this.setState({ amount: inputAmount, showErrorMessage: true });
     }
   };
+
+  // Calls function for emi calculation for the user given Amount values on input slider
   handleAmountChangeInSlider = value => {
     this.setState({ amount: value });
     this.calculateEMI();
   };
 
+  // Display error message if the user given Loan duration values on input field are not valid, else calls function for emi calculation
   handleDurationChange = e => {
     let inputDuration = Number(e.target.value);
     if (this.isValidDuration(inputDuration)) {
@@ -98,28 +101,20 @@ class App extends Component {
       this.setState({ duration: inputDuration, showErrorMessage: true });
     }
   };
+
+  // Calls function for emi calculation for the user given Loan duration values on input slider
   handleDurationChangeInSlider = value => {
     this.setState({ duration: value });
     this.calculateEMI();
   };
 
-  showValidationMessage = () => {
-    if (this.state.showErrorMessage) {
-      return (
-        <div className="errorMsg">
-          Invalid Values, Please enter amount from 500 to 5000 and duration from
-          6 to 24
-        </div>
-      );
-    }
-  };
   render() {
     return (
       <div>
         <Header />
         <div className="App">
           <div>
-            {this.showValidationMessage()}
+            <ErrorMsg errorMsgStatus={this.state.showErrorMessage} />
             <UserInputBlock
               title="Amount"
               unit={CURRENCY}
