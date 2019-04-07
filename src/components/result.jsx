@@ -9,7 +9,7 @@ function DisplayResult(props) {
         {props.emi}
       </span>{" "}
       at an Interest Rate of{" "}
-      <span className="resultDisplay">{props.interest * 100} % </span>
+      <span className="resultDisplay">{props.interest} % </span>
     </div>
   );
 }

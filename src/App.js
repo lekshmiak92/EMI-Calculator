@@ -58,8 +58,10 @@ class App extends Component {
         .then(res => res.json())
         .then(
           result => {
+            let interestRate =
+              Math.round(result.interestRate * 100 * 100) / 100;
             this.setState({
-              interest: result.interestRate,
+              interest: interestRate,
               emi: result.monthlyPayment.amount
             });
           },
