@@ -19,3 +19,25 @@ class AmountSlider extends Component {
 }
 
 export default AmountSlider;
+
+// parent.js
+
+// <Result
+//     emi={this.state.emi}
+//     interest={this.state.interest}
+//     husband="krishna kumar"
+//     callApi={this.calculateEmi}
+// />
+
+// result.js
+
+// handleAmtChange() => {
+//     //manipulations......
+//     this.props.callApi()
+// }
+// render(){
+//     <h2>EMI = {this.props.emi}</h2>
+//     <h2>interest = {this.props.interest}</h2>
+//     <h2>My Love = {this.props.husband}</h2>
+//     slider onChange{this.handleAmtChange}
+// }

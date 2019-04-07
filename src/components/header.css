@@ -1,0 +1,8 @@
+.appName {
+  color: #f38601;
+}
+.headerWrap {
+  border-bottom: 2px solid rgb(150, 149, 149);
+  text-align: center;
+  margin: 0px 2%;
+}
